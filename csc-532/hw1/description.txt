@@ -1,0 +1,27 @@
+# Author: Roland Carter
+# HW1
+# Date: 2020-06-24
+
+2. How many observation and variables does the dataset contain?
+num rows: 397
+num columns: 9
+
+3. What is the range of mpg?
+37.6
+
+4. Draw a histogram for mpg. What is the range of the tallest bar? How many cars fall within that range?
+Tallest bar range: 15-20
+91 caras are within this range
+
+5. What is the make of the heaviest car (with the maximum weight)?
+Heaviest car: pontiac safari (sw)
+
+6. What is the most frequent car year and how many cars of this year are there?
+Most frequent car year: 73
+Number of cars: 40
+
+7. How many outliers are there for the attribute horsepower?
+0 outliers
+
+8. Draw a boxplot for acceleration. Does it show any outliers?
+Yes, there are outliers

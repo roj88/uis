@@ -1,0 +1,20 @@
+Roland Carter
+Date: 2020-07-08
+HW #2
+
+2. Which suburbs have low crime rates? 2 points
+Subrubs 1, 285, & 286 have the lowest crime rates.
+
+
+4. Explore the data in order to investigate the association between crim1 and the other features. Which of the other features seem most likely to be useful in predicting crim1? Decide which attributes you are going to use to predict crim1. 5 points
+The variables with the highest correlations to our crim1 binary variable are: indus, nox, age, dis (negatively correlated), rad, & tax. Note that this used a Pearson correlation, which is sufficient and generally similar to point biserial correlations.
+
+
+9. Perform kNN on the training data, with several values of K, in order to predict crim1. Which value
+of K seems to perform the best on this data set? 6 points
+It appears that k=3 are the best values of k for this data set, having an accuracy level of 95% within a confusion matrix, and the lowest false positives and palse negatives (2 and 3, respectively). Also it is the lowest number of K with good accuracy, which can prevent future overfitting.
+
+
+11. Compare the kNN classifier with the Naïve Bayes in terms of error rates, false positives and false
+negatives. 4 points
+The kNN classifier has higher acccuracy (91% vs 78% ) than the Bayesian classifier. The kNN model has fewer false positives (2 vs 5), and fewer false negatives (3 vs 17). This means, that the Bayesian classifier was unable to when neghborhoods were in fact a higher crime neighborhood (classifying it as safer), but did classify when neighborhoods were a high crime neighborhood. If we place this in terms of something like classifying posionous mushrooms, you are okay with high false posotives (predicting a mushroom to be posionous when they aren't) vs false negatives (predicting mushrooms being non-poisonous when they are not, which can put someone in danger).
