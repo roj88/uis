@@ -1,13 +1,10 @@
-class Bootstrap:
-  def __init__(self, dataframe):
-        self.dataframe = dataframe
-        self.bernoulli = bernoulli
-        self.num_datasets = num_datasets
-        self.control_treatment = control_treatment
-        self.num_samples = num_samples
+import pandas as pd
+import numpy as np
+import math
+import random as r
 
 
-def bootstrap_monte_carlo(bernoulli, num_datasets, dataframe, control_treatment, num_samples=dataframe.size):
+def bootstrap_monte_carlo(df, control_treatment, num_samples=None, num_datasets=None):
   """Performs bootstrap monte carlo on a pandas dataframe
 
   Args:
@@ -22,18 +19,26 @@ def bootstrap_monte_carlo(bernoulli, num_datasets, dataframe, control_treatment,
   Returns:
     A list of boostrapped aggregations of len() num_datasets.
   """
+  # inform user of bootstrap beginning
+  print("Beginning bootstrap process!")
+
+  if num_datasets is None:
+    num_datasets=1000
 
   # array that will hold correlated data
   bootstrap_data_sets = []
 
-  df = dataframe.loc[dataframe['control_treatment']==control_treatment]
+  df = df.loc[df['control_treatment']==control_treatment]
   df.reset_index(drop=True, inplace=True)
+
+  if num_samples is None:
+    num_samples=len(df)
 
   # gets the size of the data set to prevent out of bounds errors
   data_frame_size = len(df.index)
 
   # create status bar
-  increments = math.ceil(num_datasets/20)
+  increments = math.ceil(num_datasets/5)
 
   # iterate through number of data sets
   for i in range(num_datasets):
@@ -43,31 +48,31 @@ def bootstrap_monte_carlo(bernoulli, num_datasets, dataframe, control_treatment,
     
     # define search and omnibox_counts
     metric_total = 0
-    successes_total = 0
-    failures_total = 0
 
     # iterate through the number of samples
     for j in range(num_samples):
       # get random row numbers
       row_num = r.randint(0, data_frame_size - 1)
 
-      if bernoulli:
-        # append new samples to the data set
-        successes_total += df['successes'].loc[row_num]
-        trials_total += df['trials'].loc[row_num]
+      # append new samples to the data set
+      metric_total += df['metric'].loc[row_num]
 
-      else:
-        # append new samples to the data set
-        metric_total += df['metric'].loc[row_num]
-
-    if bernoulli:
-      # append boostrapped data sets
-      bootstrap_data_sets.append(np.true_divide(successes_total, trials_total))
-    else:
-      # append boostrapped data sets
-      bootstrap_data_sets.append(np.true_divide(metric_total, num_samples))
+    # append boostrapped data sets
+    bootstrap_data_sets.append(np.true_divide(metric_total, num_samples))
 
 
   print('Progress Complete!')
 
   return bootstrap_data_sets
+
+
+def confidence_intervals(bootstrap_data_sets, control_treatment):
+  p_lower_bound = np.percentile(bootstrap_data_sets, 2.5)
+  p_median = np.percentile(bootstrap_data_sets, 50)
+  p_upper_bound = np.percentile(bootstrap_data_sets, 97.5)
+
+  ci_dict = {'control_treatment': [control_treatment], 'lower_bound': [p_lower_bound], 'median': [p_median], 'upper_bound': [p_upper_bound]}
+
+  return ci_dict
+
+
