@@ -1,0 +1,58 @@
+# Author: Roland Carter
+# HW3
+# Date: 2020-07-17
+
+
+4. Which predictors appear to have a statistically significant relationship to the response?
+The two predictors that have the most statistically significant relationship are the year and origin. The p-values are low and the coefficients are relatively high in comparison to the other predictors. If we want to consider a variable with a smaller coefficient, we can also consider weight, which has a low p-value, but a minimal negative coefficient.
+
+
+5. What does the coefficient for the year variable suggest?
+The coefficient for the year variable suggests that, if held constant, it has a high correlation to to mpg.
+
+
+6. Write down the linear regression equation for the model.
+Rounded to the thousandths place:
+mpg = -0.493*cylinders + 0.020*displacement - 0.017*horsepower - 0.006*weight - 0.081*acceleration + 0.751*year + 1.426*origin - 21.284
+
+
+7. Using the linear regression model, what would be the predicted value for mpg for a car with the
+following features:
+  cylinders: 4
+displacement: 100
+horsepower: 50
+weight: 3000
+acceleration: 15
+year: 75
+origin: 1
+> -0.493*4 + 0.020*100 - 0.017*50 - 0.006*3000 - 0.081*15 + 0.751*75 + 1.426*1 - 17.218
+[1] 20.5
+
+
+9. What is the decision tree size?
+Tree size: 24 
+
+
+10. Draw a confusion matrix and calculate the error rate.
+Total Observations in Table:  97 
+ 
+             | predicted 
+      actual |         1 |         2 |         3 | Row Total | 
+-------------|-----------|-----------|-----------|-----------|
+           1 |        56 |         4 |         2 |        62 | 
+             |     0.577 |     0.041 |     0.021 |           | 
+-------------|-----------|-----------|-----------|-----------|
+           2 |         2 |        13 |         3 |        18 | 
+             |     0.021 |     0.134 |     0.031 |           | 
+-------------|-----------|-----------|-----------|-----------|
+           3 |         0 |         0 |        17 |        17 | 
+             |     0.000 |     0.000 |     0.175 |           | 
+-------------|-----------|-----------|-----------|-----------|
+Column Total |        58 |        17 |        22 |        97 | 
+-------------|-----------|-----------|-----------|-----------|
+
+11/97 = 0.113 error rate
+
+
+11. Using the decision tree, what is the precited value of origin for the following car:
+Origin = 2
